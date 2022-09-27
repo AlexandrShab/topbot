@@ -1,0 +1,199 @@
+body {
+    padding: 0px;
+    margin: 0;
+    background-color: mintcream;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.auth-bar{
+    background-color: rgb(65, 94, 77);
+    padding-top: 3px;
+    padding-left: 3px;
+    margin: 0;
+    
+}
+.bar {
+    list-style-type: none;
+    margin: 30;
+    margin-top: 0px;
+    padding: 0;
+    padding-top: 2px;
+    overflow: hidden;
+    background-color:dimgray;
+    height: 50px;
+    text-align: center;
+    vertical-align: bottom;
+    
+}
+.name-page{
+    margin-left: 10%;
+    
+}
+
+li {
+    float: left;
+}
+
+li a, .dropbtn {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+    background-color: gray;
+    transition: 0.5s;
+}
+
+li .dropdown {
+    display: inline-block;
+    
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 10px 10px 10px 3px rgba(0,0,0,0.2);
+    z-index: 1;
+    transition: 1s;
+}
+
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {background-color: lightgrey}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.help{
+    border-radius: 5px;
+    background-color: rgb(255, 242, 255);
+    padding: 7px;
+    font-size: small;
+    transform: translate(30px,10px);
+    opacity: 0.9;
+}
+.footer{
+    height: 30px;
+    padding-top: 10px;
+}
+dev{
+    font-size: 12px;
+    
+}
+auth{
+    float: right;
+    vertical-align: middle;
+    
+}
+
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+
+    td, th{
+            border: 1px solid black;
+            
+        }
+        tr:hover{
+          color: darkblue;
+          transition: color 0.3 0.3;
+        }
+        .btn-get, .btn-find{
+          display: inline-block; /* Строчно-блочный элемент */
+          text-decoration: none;
+          text-align: center;
+          padding: 10px;
+          border:none;
+          background-color: #f9f9f9;
+          height: 50px;
+          width:100px;
+          margin-top: 0px;
+          margin-left: 20px;
+          margin-bottom: 20px;
+          border-radius: 5px;
+          box-shadow: 5px 0px 5px 1px lightgray;
+         }
+        .btn-get:hover, .btn-find:hover{
+          background-color: lightgray;
+          box-shadow: 5px 0px 5px 5px  gainsboro; 
+          border: 1px solid white;
+        }
+        .btn-get:active, .btn-find:active{
+          background-color: gray;
+          box-shadow: none;
+        }
+        .btn-min {
+          display: inline-block; /* Строчно-блочный элемент */
+          
+          text-align: center;
+          padding: 10px;
+          border:none;
+          background-color: #f9f9f9;
+          height: 30px;
+          margin-top: 10px;
+          margin-left: 20px;
+          width: 50px;
+          border: 1px solid #f9f9f9;
+          border-radius: 5px;
+          box-shadow: 5px 0px 5px 1px lightgray;     
+        }
+        .btn-min:hover{
+          background-color: lightgray;
+          box-shadow: 5px 0px 5px 1px  gainsboro; 
+          border: 1px solid white;
+        }
+        .btn-min:active{
+          background-color: gray;
+          box-shadow: none;
+        }
+        .findbar{
+          font-size:16px;
+          height:70px;
+          padding:20px;
+          color:black;
+        }
+        .add-page{
+          margin-left: 30px;
+        }
+        .finded-players{
+          margin:20px;
+          background-color: #f9f9f9;
+          border: 1px solid gray;
+          width: 40%;
+        }
+        #find{
+          height: 40px;
+          margin: 0px;
+          width: 40%;
+        }
+        #find:hover{
+          cursor:zoom-in;
+        }
+
+       .input-item{
+        margin: 20px;
+        width: 90%;
+        border: none;
+        height: 30px;
+        background-color: #f9f9f9;
+        margin-top: 0px;
+       }
+      .content {
+        margin: 40px;
+        margin-top: 140px;
+      }
+      .player-info td{
+        padding: 5px;
+        border: none;
+      }
