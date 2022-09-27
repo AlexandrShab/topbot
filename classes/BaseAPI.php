@@ -202,12 +202,14 @@ class BaseAPI
     function getLastPlayerId()
     {
         $db = new Connect;
-        $query = "SELECT value FROM `variables` WHERE name ='last_play_id';";
-        //print_r($query);
+       
+        $query = "SELECT MAX(id) FROM `players`";
+        
         $data = $db->prepare($query);
         $data->execute();
-        $lastId = $data->fetch(PDO::FETCH_OBJ);
+        $lastId = $data->fetch(PDO::FETCH_ASSOC);
         return $lastId;
+      
     }
     function getTeamNames()
     {

@@ -31,7 +31,7 @@
                     {{ finded[3] }}<br/>
                 </div>
             <button class="btn-get" @click="findPlayerByName()">Проверка</button>
-            <button class="btn-get" @click="findPlayerByName()">Добавить</button>
+            <button class="btn-get" @click="addPlayer()">Добавить</button>
 
             
         </div>

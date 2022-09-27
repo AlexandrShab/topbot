@@ -89,6 +89,30 @@ const app = Vue.createApp({
             this.teams.push(teamNames[i])
             }
             console.log(this.teams)
+      },
+      async addPlayer(){
+        if ((this.error == '') && (this.newPlayerId != 'не доступен') && (this.playerName !='') && (this.selected != 'команда не выбрана')){
+          let data = { 
+            "id": this.newPlayerId,
+            "name": this.playerName,
+            "team": this.teams.indexOf(this.selected)+1
+        }
+        console.log(data) 
+          let options = {
+            "method": "POST",
+            "headers":{
+                "Content-Type": "application/json"
+              },
+            "body": JSON.stringify(data)
+          }
+        let resp = await fetch('http://topbots.site/api/addplayer.php', options)
+          
+          let res = await resp.json()
+          console.log(res.name)
+          this.getNewPlayerId()
+          this.playerName = ''
+          this.selected = 'команда не выбрана'
+        }
       }
     
       },
