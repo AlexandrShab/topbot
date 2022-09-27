@@ -96,7 +96,7 @@ if($_SERVER["REQUEST_URI"] == '/news')
 }//~~~~~~~~~~~~~
 if($_SERVER["REQUEST_URI"] == '/players') 
 {
-    if ($isAdmin)
+    //if ($isAdmin)
     {
       require_once __DIR__ . '/pages/players.php';
     }  
@@ -107,7 +107,7 @@ if($_SERVER["REQUEST_URI"] == '/players')
 //~~~~~~~~~~~~~
 if($_SERVER["REQUEST_URI"] == '/addPlayer') 
 {
-    if ($isAdmin)
+   // if ($isAdmin)
    {
       require_once __DIR__ . '/pages/addPlayer.php';
       require_once __DIR__ . '/pages/footer.php';
@@ -117,7 +117,7 @@ if($_SERVER["REQUEST_URI"] == '/addPlayer')
 //~~~~~~~~~~~~~
 if($_SERVER["REQUEST_URI"] == '/getUsers') 
 {
-    if ($isAdmin)
+   // if ($isAdmin)
    {
         $dataBase = new BaseAPI;
         $data = $dataBase->getAllUsers();
@@ -135,7 +135,7 @@ if($_SERVER["REQUEST_URI"] == '/getUsers')
 }
 //~~~~~~~~~~~~~
 //if (($_SERVER["REDIRECT_URL"] == '/getPlayer') && ($_GET['id']) && $isAdmin)        //getPlayer  
-if (($_SERVER["REQUEST_URI"] == '/getPlayer') && ($_GET['id']) && $isAdmin)
+if (($_SERVER["REQUEST_URI"] == '/getPlayer') && ($_GET['id']) )//&& $isAdmin
 {
 
 //$colors = ["#DCDCDC", "#C3FBD8", "#C6D8FF", "#FED6BC", "#ffccff", "#CCCC66", "#98FB98", "#f5ff8c"];

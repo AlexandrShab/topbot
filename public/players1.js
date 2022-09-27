@@ -63,7 +63,7 @@ const app = Vue.createApp({
       this.fName = ''
     },
     async getPlayerLink(id){
-      window.location.href = '/api/getPlayer.php?id='+id;
+      window.location.href = '/getPlayer?id='+id;
     },
     getTeam(team_id){
       this.playersOfTeam = []
