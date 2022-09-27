@@ -95,7 +95,8 @@ const app = Vue.createApp({
           let data = { 
             "id": this.newPlayerId,
             "name": this.playerName,
-            "team": this.teams.indexOf(this.selected)+1
+            "team": this.teams.indexOf(this.selected)+1,
+            "add_player": "1"
         }
         console.log(data) 
           let options = {
@@ -105,6 +106,7 @@ const app = Vue.createApp({
               },
             "body": JSON.stringify(data)
           }
+          this.error = 'Игрок '+this.playerName+' добавляется... Подождите завершения.';
         let resp = await fetch('http://topbots.site/api/addplayer.php', options)
           
           let res = await resp.json()
@@ -112,6 +114,7 @@ const app = Vue.createApp({
           this.getNewPlayerId()
           this.playerName = ''
           this.selected = 'команда не выбрана'
+          this.error = ''
         }
       }
     
