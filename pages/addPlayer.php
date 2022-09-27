@@ -5,7 +5,7 @@
     <div class="add-page" id="container">  
         <div class="input-block">
             <label for="select">Выбор команды: <strong>{{ selected }}</strong></label>
-            <br/>
+            <br/><br/>
             <select class="input-item" id="select" v-model="selected">
                     <option disabled>Выбор команды: </option>
                     <option v-for="team in teams"><strong>{{ team }}</strong></option>
@@ -13,7 +13,10 @@
             </select> 
             <br/>
             <span>ID игрока: <strong>{{newPlayerId}}</strong></span><br/>
-            <text style="visibility:hidden;"> Есть такой </text><err style="color: firebrick; margin-left:10px">{{ error }}</err>
+            <div>
+                <text style="visibility:hidden;"> Есть такой </text>
+                <err style="color: firebrick; margin-left:10px">{{ error }}</err>
+            </div>
             <input class="input-item" 
                     type="text" 
                     v-model.trim="playerName" 
@@ -27,8 +30,8 @@
                     {{ finded[2] }}<br/>
                     {{ finded[3] }}<br/>
                 </div>
-            <button class="btn-get" @click="findPlayerByName()">Запуск</button>
-            
+            <button class="btn-get" @click="findPlayerByName()">Проверка</button>
+            <button class="btn-get" @click="findPlayerByName()">Добавить</button>
 
             
         </div>
