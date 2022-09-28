@@ -49,22 +49,23 @@ class User
         return true;
     }
    public function getUserBox()
-    {
-        $output = "<div class=\"user-box\">
+    {   $output = "<div class=\"user-box\">";
+        $output .= "<h2>Данные Телеграм</h2><hr/>
             <h2 class=\"user-name\">$this->first_name  $this->last_name </h2>
             <a href=\"$this->photo_url\"><img src=\"$this->photo_url\" alt=\"$this->first_name $this->last_name\"
-            style=\"width:80px;border: 2px solid white;box-shadow: 1px 3px 12px 0px;\"></a><br/><br/>
+            style=\"width:80px;height:80px;border: 2px solid white;box-shadow: 1px 3px 12px 0px;\"></a><br/><br/>
             <text>UserName: $this->username</text><br/>
-            <text>UserID  : $this->id </text>";
-    
-        if(isset($this->username))
+            <text>UserID  : $this->id </text><br/>";
+           $this->checkAdmin();
+        if ($this->isAdmin == '1')
         {
-            $output .= "<h2>Данные Телеграм</h2><hr/><br/>";
-            if($this->photo_url)
-            {
-                $output .= $this->photo_url."<br/>";
-            }
-            $output .= "<a class='btn-get' href='https://t.me/$this->username'>Написать в личку</a>";$output .= "<a class=\"btn-get\" href=\"https://t.me/$this->username\">Написать в личку</a>";
+            $output .= "<strong>Админ</strong><br/><br/>";
+        }
+        
+        if(strlen($this->username)>1)
+        {
+            $output .= "<button class=\"btn-get\" onclick=\"window.location.href='https://t.me/$this->username';\">Написать в личку</button>";
+            //$output .= "<a class='btn-get' href='https://t.me/$this->username'>Написать в личку</a>";
         }
     $output .="</div>";
     return $output;

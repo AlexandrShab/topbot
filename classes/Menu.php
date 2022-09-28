@@ -6,7 +6,7 @@ class Menu
                 <div class=\"dropdown-content\">
                     <a href=\"/addPlayer\">Добавить игрока</a>
                     <a href=\"#\">Link 2</a>
-                    <a href=\"#\">Link 3</a>
+                    <a href=\"/getUsers\">Пользователи</a>
                 </div>
             </li>";
 }

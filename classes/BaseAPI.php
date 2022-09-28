@@ -156,17 +156,19 @@ class BaseAPI
         $data = $db->prepare($query);
         $data->execute();
         echo $table;
-        $query = "CREATE TABLE `$table` (
+        $query = "CREATE TABLE `kc_05` (
             `id` INT(10) NOT NULL AUTO_INCREMENT,
             `player_id` INT(10) NOT NULL,
             `res_1` INT(10) NULL DEFAULT NULL,
             `res_2` INT(10) NULL DEFAULT NULL,
             `res_3` INT(10) NULL DEFAULT NULL,
             `res_4` INT(10) NULL DEFAULT NULL,
-            PRIMARY KEY (`id`) USING BTREE
+            PRIMARY KEY (`id`) USING BTREE,
+            UNIQUE INDEX `player_id` (`player_id`) USING BTREE
         )
         COLLATE='utf8mb4_bin'
         ENGINE=InnoDB
+        AUTO_INCREMENT=1
         ;";
         $data = $db->prepare($query);
         $data->execute();
@@ -244,5 +246,35 @@ class BaseAPI
             $arrUsers[] = $user;
         }
         return $arrUsers;
+    }
+
+    function getKsTableName($ks_name)
+    {
+        $base = new Connect;
+        $query = "SELECT table_name FROM kc_list WHERE name = '$ks_name' LIMIT 1;";
+            
+            $data = $base->prepare($query);
+            $data->execute();
+            $table_name = $data->fetch(PDO::FETCH_OBJ);
+
+            return $table_name->table_name;
+    }
+
+    function saveKcResults($table_name, $res_num, $data)
+    {
+        $res_num = 'res_' . $res_num;
+        $base = new Connect;
+        
+        foreach ($data as $num=>$player)
+        {
+            $id = $player['id'];
+            $res = $player['res']; 
+            $query = "INSERT INTO $table_name (player_id, $res_num) 
+            VALUES('$id', '$res') ON DUPLICATE KEY UPDATE $res_num = '$res';";
+            
+            $data = $base->prepare($query);
+            $data->execute();   
+        }
+        return true;
     }
 }

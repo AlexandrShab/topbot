@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . '/BaseAPI.php';
 
-
 class Player
 {
     public $num;
@@ -33,7 +32,7 @@ class Player
             $this->$key = $value;
         }
     }
-
+    
     public function setProperties($arr)
     {
         foreach ($arr as $key) {
@@ -84,7 +83,7 @@ class Player
         //print_r($query);
         $data = $base->prepare($query);
         $data->execute();
-                
+
         return true;
     }
     public function restore()
@@ -173,8 +172,9 @@ class Player
                     border: solid gray 2px;\">";
 
     $output .= "<p><strong>$this->teamName</strong></p>";
-    $output .="<button class=\"btn-get\" onclick='document.location.href=\"server?action=edit_player&player_id=$this->id\"'>Edit Player</button>";
-    $output .= "<div class=\"name-page\"><h1>$this->name</h1></div><hr/>";
+    
+    $output .= "<div class=\"name-page\"><h1>$this->name</h1></div>";
+    $output .="<button class=\"btn-get\" onclick='document.location.href=\"server?action=edit_player&player_id=$this->id\"'>Изменить</button><hr/>";
     if(strlen($this->friend_link)>6)
     {
         $output .= "Добавить в друзья -> <a href='$this->friend_link'>$this->friend_link</a><hr/>";
@@ -200,8 +200,9 @@ class Player
                 <select name=\"team\" style=\"height: 50px;
                                             border:none;\" required>
                     <option disabled value=\"\">Выбор команды</option>";
-                        for($i=0; $i < count($teamNames); $i++){ 
-                            $output .= "<option value=\"$i+1\">$teamNames[$i]</option>";
+                        for($i=0; $i < count($teamNames); $i++){
+                            $idx = $i+1;
+                            $output .= "<option value=\"$idx\">$teamNames[$i]</option>";
                         }
             $output .="</select>
                 
@@ -218,7 +219,8 @@ class Player
                                     border:none;\" required>
                     <option disabled value=\"\">Выбор команды</option>";
                     for($i=0; $i < count($teamNames); $i++){ 
-                            $output .= "<option value=\"$i+1\">$teamNames[$i]</option>";
+                           $idx = $i+1;
+                            $output .= "<option value=\"$idx\">$teamNames[$i]</option>";
                         }
                  $output .="</select>
                 
@@ -226,8 +228,9 @@ class Player
             </form><hr/>";
     }  
     
-
+        
         $output.= '</div>';
+        
         $output.=  "<script src=\"/script/getPlayerInfo.js\"></script>";
         return $output;
     }
@@ -238,6 +241,6 @@ class Player
         $query = "UPDATE players SET name = '$this->name', team = '$this->team', present = '$this->present', user_id = '$this->user_id', fname = '$this->fname', lname = '$this->lname', username = '$this->username',date_in = '$this->date_in', date_out = '$this->date_out',  friend_link = '$this->friend_link' WHERE id ='$this->id';";
         $data = $db->prepare($query);
         $data->execute();
-        return true;
+        return $query;
     }
 }
