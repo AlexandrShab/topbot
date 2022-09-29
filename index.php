@@ -6,24 +6,6 @@ require_once __DIR__ . '/autoload.php';
 $html = '<span> </span>';
 define('BOT_USERNAME', 'ByTopBot'); // place username of your bot here
 
-
-function getTelegramUserData() {
-  if (isset($_COOKIE['tg_user'])) {
-    //include __DIR__ . '/api/class_user.php';
-    $auth_data_json = urldecode($_COOKIE['tg_user']);
-    $auth_data = json_decode($auth_data_json, true);
-    $user = new User($auth_data);
-    if(!$user->isInBase())
-    {
-        $user->addTobase();
-    }
-    $user->checkAdmin();
-
-    return $user;
-  }
-  return false;
-}
-
 if ($_GET['logout']) {
   setcookie('tg_user', '');
   header('Location: index.php');

@@ -250,16 +250,16 @@ class BaseAPI
 
     function getKsTableName($ks_name)
     {
-        $base = new Connect;
+      $base = new Connect;
         $query = "SELECT table_name FROM kc_list WHERE name = '$ks_name' LIMIT 1;";
             
             $data = $base->prepare($query);
             $data->execute();
             $table_name = $data->fetch(PDO::FETCH_OBJ);
-
-            return $table_name->table_name;
+            print_r($table_name->table_name);
+            return $table_name->table_name;  
     }
-
+    
     function saveKcResults($table_name, $res_num, $data)
     {
         $res_num = 'res_' . $res_num;
