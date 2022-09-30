@@ -123,16 +123,6 @@ class BaseAPI
         $data->execute();
         return true;
     }
-
-    function deleteRow($id)
-    {
-        $db = new Connect;
-        $query = "DELETE FROM products WHERE id = $id;";
-        //print_r($query);
-        $data = $db->prepare($query);
-        $data->execute();
-        return true;
-    }
     
     function updatePlayerParam($id, $param, $value)
     {

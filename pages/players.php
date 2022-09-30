@@ -31,6 +31,9 @@
         <table style="width:100%;border-collapse: collapse;"> 
             <thead>
                 <tr v-if="typeof players === 'object'" style="background: lightgray;">
+                    <th>
+                        №
+                    </th>
                     <th >
                         ID
                     </th>
@@ -49,13 +52,16 @@
             <tbody>
             
                 
-                    <tr v-for="player in players"  
+                    <tr v-for="(player, index) in players"  
                         :style=" { backgroundColor: colors[player.team]  }" 
                         @click="getPlayerLink(player.id)"
                         >
                         <!--@click="player.active = !player.active"-->
                         <!-- @mouseover="player.active=true"
                         @mouseout="player.active = false"-->
+                        <td>
+                            <strong>{{ parseInt(index) + 1 }}</strong>
+                        </td>
                         <td>
                             <strong>{{ player.id }}</strong>
                         </td>
