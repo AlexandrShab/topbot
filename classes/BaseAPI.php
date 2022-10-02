@@ -145,21 +145,21 @@ class BaseAPI
         //print_r($query);
         $data = $db->prepare($query);
         $data->execute();
-        echo $table;
-        $query = "CREATE TABLE `kc_05` (
-            `id` INT(10) NOT NULL AUTO_INCREMENT,
-            `player_id` INT(10) NOT NULL,
-            `res_1` INT(10) NULL DEFAULT NULL,
-            `res_2` INT(10) NULL DEFAULT NULL,
-            `res_3` INT(10) NULL DEFAULT NULL,
-            `res_4` INT(10) NULL DEFAULT NULL,
-            PRIMARY KEY (`id`) USING BTREE,
-            UNIQUE INDEX `player_id` (`player_id`) USING BTREE
-        )
-        COLLATE='utf8mb4_bin'
-        ENGINE=InnoDB
-        AUTO_INCREMENT=1
-        ;";
+        //echo $table;
+        $query = "CREATE TABLE `$table` (
+            	`id` INT(10) NOT NULL AUTO_INCREMENT,
+                `player_id` INT(10) NOT NULL REFERENCES `players` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION,
+                `res_1` INT(10) NULL DEFAULT NULL,
+                `res_2` INT(10) NULL DEFAULT NULL,
+                `res_3` INT(10) NULL DEFAULT NULL,
+                `res_4` INT(10) NULL DEFAULT NULL,
+                PRIMARY KEY (`player_id`) USING BTREE,
+                UNIQUE `id` (`id`) USING BTREE
+            )
+            COLLATE='utf8mb4_bin'
+            ENGINE=InnoDB
+            AUTO_INCREMENT=1
+            ;";
         $data = $db->prepare($query);
         $data->execute();
         return true;

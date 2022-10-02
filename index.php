@@ -123,9 +123,9 @@ if (($_SERVER["REQUEST_URI"] == '/getPlayer') && ($_GET['id']) )//&& $isAdmin
 //$colors = ["#DCDCDC", "#C3FBD8", "#C6D8FF", "#FED6BC", "#ffccff", "#CCCC66", "#98FB98", "#f5ff8c"];
 $base = new BaseAPI;
 
-$player = new Player;
+$player = new Player($_GET);//!!!!!!!!!!!!!!!!!!!!!!!!
 
-$player->id = $_GET['id'];
+
 $player = $player->getInfo();
 
 $teamNames = $base->getTeamNames();

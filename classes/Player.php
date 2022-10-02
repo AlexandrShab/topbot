@@ -15,22 +15,26 @@ class Player
     public $date_out;
     public $friend_link;
     public $teamName;
-
-    public function __get($name)
-    {
-        return $this->$name;
-    }
-    public function __set($name, $value)
-    {
-        $this->$name = $value;
-    }
+    public $kc_results;
     
-    public function init($arr)
+    public function __construct($arr)
     {
         foreach ($arr as $key=>$value)
         {
             $this->$key = $value;
         }
+    }
+
+    public function init($arr)
+    {
+        $base = new Connect;
+        $query = "SELECT * FROM players WHERE id ='$this->id' LIMIT 1";
+        
+        $data = $base->prepare($query);
+        $data->execute();
+        $obj = $data->fetch(PDO::FETCH_OBJ);
+        
+        return $obj;
     }
     
     public function setProperties($arr)
@@ -242,5 +246,57 @@ class Player
         $data = $db->prepare($query);
         $data->execute();
         return $query;
+    }
+    function getKcResults($kol_kc) //если $kol_kc==0, выдаст все результаты
+    {       //Выдает массив [[название кс, [res1, res2, res3, res4]]]
+        $db = new Connect;
+        $query = "SELECT * FROM kc_list ORDER BY id DESC";// В порядку обратном добавлению кс
+        $data = $db->prepare($query);
+        $data->execute();
+        while ($out_data = $data->fetch(PDO::FETCH_ASSOC)){
+            $kc_table_data[] = $out_data;
+        }    
+            if(!$kc_table_data) return false;
+            if(!$kol_kc or (count($kc_table_data) < $kol_kc)) $kol_kc = count($kc_table_data);
+        for ($i = 0; $i < $kol_kc; $i++)
+        {   
+            $kc_name = $kc_table_data[$i]['name'];
+            $table = $kc_table_data[$i]['table_name'];
+            $query = "SELECT * FROM $table WHERE player_id = $this->id;";
+            $data = $db->prepare($query);
+            $data->execute();
+            $kc_data = $data->fetch(PDO::FETCH_ASSOC);
+            if ($kc_data)
+            {   
+                $kc_data = array($kc_data['res_1'],$kc_data['res_2'],$kc_data['res_3'],$kc_data['res_4']);
+                $resy = [];
+                foreach($kc_data as $val)
+                {
+                    if(($val != null) || ($val > 0))
+                    {
+                        $resy[] = $val;
+                    }
+                }
+                $arr['kc_name'] = $kc_name;
+                $arr['results'] = $resy;
+                $all_kc_data[] = $arr;
+            }
+        }
+            if(!$all_kc_data) return false;
+            $this->kc_results = $all_kc_data;
+            return $all_kc_data;
+    }
+    function getAvgResults($kol_kc)
+    {
+        if(!$this->kc_results)
+        {
+            $this->kc_results = $this->getKcResults($kol_kc);
+        }
+        if(!$this->kc_results) return false;
+        if(($kol_kc>count($this->kc_results)) or ($kol_kc == 0)) $kol_kc = count($this->kc_results);
+        for ($i=0;$i<$kol_kc;$i++)
+        {
+            $kc = $this->kc_results[$i]['results'];
+        }
     }
 }
