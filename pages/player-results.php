@@ -30,21 +30,21 @@
             <tbody>
             
                 
-                    <tr v-for="ks_results in ks_resultes">   
+                    <tr v-for="key in ks_resultes">   
                         <td>
-                            <strong>{{ ks_results.ks_name }}</strong>
+                            <strong>{{ key }}</strong>
                         </td>
                         <td>
-                            <strong>{{ ks_results.results[0] }}</strong>
+                            <strong>{{ key.res_1 }}</strong>
                         </td>
                         <td>
-                            <strong>{{ks_results.results[1] }}</strong> 
+                            <strong>{{key.res_2 }}</strong> 
                         </td>
                         <td>
-                            <strong>{{ks_results.results[2] }}</strong> 
+                            <strong>{{key.res_3 }}</strong> 
                         </td>
                         <td>
-                            <strong>{{ks_results.results[3] }}</strong> 
+                            <strong>{{key.res_4 }}</strong> 
                         </td>    
                                           
                     </tr>                 
@@ -61,9 +61,7 @@
                     <th >
                         Мощность гаража
                     </th>
-                    <th >
-                        Прирост за неделю
-                    </th>
+                    
                     
                     
                 </tr>
@@ -76,11 +74,9 @@
                             <strong>{{ garage.date }}</strong>
                         </td>
                         <td>
-                            <strong>{{ garage.garagePower }}</strong>
+                            <strong>{{ garage.gar }}</strong>
                         </td>
-                        <td>
-                            <strong>{{garage.diff}}</strong> 
-                        </td>                      
+                                             
                     </tr>                 
             </tbody>
         </table>
@@ -99,7 +95,7 @@
             <tbody>
             
                 
-                    <tr v-for="item in chests" style="border: solid black 1px;">   
+                    <tr v-for="item in km" style="border: solid black 1px;">   
                         <td>
                             <strong>{{ item.date }}</strong>
                         </td>
