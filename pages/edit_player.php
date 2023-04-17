@@ -6,8 +6,8 @@
     
     
         
-            Player ID:<br/>
-            <input id="id" class="input-item" name="id" value="<?php echo $player->id; ?>" disabled></br>
+            Player ID: <?php echo $player->id; ?><br/><br/>
+            <input type="hidden" name="id" value="<?php echo $player->id; ?>">
                
             Ник:<br/>
             <input id="name" class="input-item" name="name" value="<?php echo $player->name; ?>" required></br>
@@ -40,6 +40,6 @@
             <input id="friend_link" class="input-item" type="url" name="friend_link" value="<?php echo $player->friend_link; ?>"></br>
         <input type="hidden" name="update_player" value="true">
     
-    <button class="submit-btn btn-get" type="submit">Save</button>
-    <button class="cancel-btn btn-get" type="reset">Cancel</button>
+    <button class="submit-btn btn-get" type="submit">Сохранить</button>
+    <button class="cancel-btn btn-get" type="reset">Сброс</button>
 </form>

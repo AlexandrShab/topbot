@@ -4,12 +4,9 @@ echo "<div class='content'
             style='background: $colors[$team]; 
                     padding: 20px;
                     border: solid gray 2px;'>";
-
-                    
     $output = "<p><strong>$teamName</strong></p>";
-    $output .="<button class=\"btn-get\" onclick=\"document.location=\"/editPlayer?id=$player->id\">Edit Player</button>  ";
     $output .= "<div class=\"name-page\"><h1>$player->name</h1></div><hr/>";
-    if(strlen($player->friend_link)>6)
+/*    if(strlen($player->friend_link)>6)
     {
         $output .= "Добавить в друзья -> <a href='$player->friend_link'>$player->friend_link</a><hr/>";
     }
@@ -76,7 +73,8 @@ echo "<div class='content'
     {
         $output .= "<a class='btn-get' href='https://t.me/$player->username'>Написать в личку</a>";
     }
+    */
 echo $output;
 echo '</div>';
-echo '<script src="/script/getPlayerInfo.js"></script>';
-?>*/
+echo '<script src="/script/getPlayerInfo.js"></script>';*/
+?>

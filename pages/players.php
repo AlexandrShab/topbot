@@ -1,7 +1,7 @@
 <div class="name-page">
         <h1>Игроки</h1>
     </div>
-<div id="container">
+<div class="container" id="container">
     <div class="findbar">
         <label for="find" id="find-label">Поиск игрока: </label><span>{{ fName }}</span><br/>
         <input type="text" id="find" v-model="fName" class="input-item" @keyup.enter="findPlayerByName()" placeholder="Введите имя или его часть">
@@ -25,7 +25,7 @@
         <input type="button" class="btn-min" value="5" @click="getTeam(5)">
         <input type="button" class="btn-min" value="6" @click="getTeam(6)">
         <input type="button" class="btn-min" value="7" @click="getTeam(7)">
-
+        <input type="button" class="btn-min" value="8" @click="getTeam(8)">
         
         <br/><br/><br/><br/>
         <table style="width:100%;border-collapse: collapse;"> 
@@ -86,9 +86,9 @@
         </table>
        
     </div>
-    
+ </div>   
     
 
     <script src="https://unpkg.com/vue@3.2.36"></script>
-   <!-- <script src="/script/players1.js"></script> -->
-    <script src="/public/players1.js"></script>
+    <script src="/script/players.js"></script>
+  <!--  <script src="/public/players1.js"></script>-->

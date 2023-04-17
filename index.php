@@ -1,6 +1,7 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 require_once __DIR__ . '/classes/request.php';
+require_once __DIR__ . '/classes/functions.php';
 require_once __DIR__ . '/autoload.php';
 //var_dump($_COOKIE);
 $html = '<span> </span>';
@@ -54,14 +55,14 @@ header('Content-Type: text/html');
 $html .= "</div>";
 
 $html .= "<ul class=\"bar\">";
- // if ($isAdmin)
+  if ($isAdmin)
     {
       $menu = new Menu;
       $html .= $menu->content;
     }
 $menuItem = new PublicMenuItems;
 $html .= $menuItem->content;
- // if ($tg_user !== false)
+  if ($tg_user !== false)
     {
       $players = new PlayersLink;
       $html .= $players->content;
@@ -70,6 +71,16 @@ $html .= '</ul>';
 print_r($html);
 
 // ~~~~~~~~~~ Начало контента страницы~~~~~~~~~~~~~~~~~~~~~
+if($_SERVER["REQUEST_URI"] == '/upload-results') 
+{
+    //if ($isAdmin)
+    {
+      require_once __DIR__ . '/pages/upload-results.php';
+    }  
+      require_once __DIR__ . '/pages/footer.php';
+      exit;
+}
+//~~~~~~~~~~~~~
 if($_SERVER["REQUEST_URI"] == '/news') 
 {   
   require_once __DIR__ . '/pages/news.php';
@@ -78,7 +89,7 @@ if($_SERVER["REQUEST_URI"] == '/news')
 }//~~~~~~~~~~~~~
 if($_SERVER["REQUEST_URI"] == '/players') 
 {
-    //if ($isAdmin)
+    if ($isAdmin)
     {
       require_once __DIR__ . '/pages/players.php';
     }  
@@ -89,7 +100,7 @@ if($_SERVER["REQUEST_URI"] == '/players')
 //~~~~~~~~~~~~~
 if($_SERVER["REQUEST_URI"] == '/addPlayer') 
 {
-   // if ($isAdmin)
+    if ($isAdmin)
    {
       require_once __DIR__ . '/pages/addPlayer.php';
       require_once __DIR__ . '/pages/footer.php';
@@ -99,7 +110,7 @@ if($_SERVER["REQUEST_URI"] == '/addPlayer')
 //~~~~~~~~~~~~~
 if($_SERVER["REQUEST_URI"] == '/getUsers') 
 {
-   // if ($isAdmin)
+    if ($isAdmin)
    {
         $dataBase = new BaseAPI;
         $data = $dataBase->getAllUsers();
@@ -107,6 +118,7 @@ if($_SERVER["REQUEST_URI"] == '/getUsers')
         for($i = 0;$i<count($data);$i++)
         {
            $user = new User($data[$i]);
+          // $user = $user->init();
            $output .= $user->getUserBox();
         }
 
@@ -116,24 +128,49 @@ if($_SERVER["REQUEST_URI"] == '/getUsers')
     }
 }
 //~~~~~~~~~~~~~
-//if (($_SERVER["REDIRECT_URL"] == '/getPlayer') && ($_GET['id']) && $isAdmin)        //getPlayer  
-if (($_SERVER["REQUEST_URI"] == '/getPlayer') && ($_GET['id']) )//&& $isAdmin
+if (($_SERVER["REDIRECT_URL"] == '/getPlayerResults') && ($_GET['id']) && $isAdmin)        //getPlayerResults  
+{
+    $base = new BaseAPI;
+    
+    $player = new Player;
+    
+    $player->id = $_GET['id'];
+    $player = $player->getInfo();
+                //отправка объекта Player боту для сбора и сохранения резов в FireBase
+    $player->get_player_stat = "true";
+        sendDataToBot($player);
+        
+    $teamNames = $base->getTeamNames();
+    
+    $team = $player->team - 1;
+    $player->teamName = $teamNames[$team];
+    require_once __DIR__ . '/pages/player_stata.php';
+    $output;
+    $output .= "Игрок ". $player->name . " ID: " . $player->id; 
+    echo $output;
+    require_once __DIR__ . '/pages/footer.php';
+    exit;
+}
+//~~~~~~~~~~~~~~~
+if (($_SERVER["REDIRECT_URL"] == '/getPlayer') && ($_GET['id']) && $isAdmin)        //getPlayer  
 {
 
-//$colors = ["#DCDCDC", "#C3FBD8", "#C6D8FF", "#FED6BC", "#ffccff", "#CCCC66", "#98FB98", "#f5ff8c"];
-$base = new BaseAPI;
-
-$player = new Player($_GET);//!!!!!!!!!!!!!!!!!!!!!!!!
-
-
-$player = $player->getInfo();
-
-$teamNames = $base->getTeamNames();
-
-$team = $player->team - 1;
-$player->teamName = $teamNames[$team];
-
-$output;
+    //$colors = ["#DCDCDC", "#C3FBD8", "#C6D8FF", "#FED6BC", "#ffccff", "#CCCC66", "#98FB98", "#f5ff8c", "#e999ff"];;
+    $base = new BaseAPI;
+    
+    $player = new Player;
+    
+    $player->id = $_GET['id'];
+    $player = $player->getInfo();
+    
+    $teamNames = $base->getTeamNames();
+    
+    $team = $player->team - 1;
+    $player->teamName = $teamNames[$team];
+    
+    $output;
+    
+    
 if (strlen($player->user_id)>1){
     $arrUser = $base->getUserById($player->user_id);
     if ($arrUser == false && $player->user_id > 0){
@@ -184,8 +221,7 @@ if (strlen($player->name) < 1)
 
 } 
 //~~~~~~~~~~~~~~~~~~~~~~~ Обработка обращений к API /server~~~~~~~~~~~~~~~
-//if ($_SERVER["REDIRECT_URL"] == '/server')
-if ($_SERVER["REQUEST_URI"] == '/server')
+if ($_SERVER["REDIRECT_URL"] == '/server')
 {
   if ($_GET)
   {
@@ -221,3 +257,5 @@ if ($_SERVER["REQUEST_URI"] == '/server')
 require_once __DIR__ . '/pages/team.php';
 require_once __DIR__ . '/pages/footer.php';
 exit;
+
+

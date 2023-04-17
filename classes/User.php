@@ -9,17 +9,16 @@ class User
     public $last_name;
     public $username;
     public $photo_url;
-    public $player_id_arr;
 
     
     public function __construct($arrUser)
-    {   
+    {
         foreach ($arrUser as $key => $value) 
         {
                 $this->$key = $value;
         }
     }
-
+    
     public function init()
     {
         $base = new Connect;
@@ -34,7 +33,7 @@ class User
         }
         return $obj;
     }
-
+    
     public function isInBase()
     {
         $base = new Connect;
@@ -55,6 +54,26 @@ class User
         $this->isAdmin = $arr['is_admin']; 
         return $this->isAdmin;
     }
+    public function setAsAdmin($id)
+    {
+        $base = new Connect;
+        $query = "UPDATE `users` SET is_admin=1 WHERE id ='$id';";
+        
+        $data = $base->prepare($query);
+        $data->execute();
+        
+        return true;
+    }
+    public function unsetAsAdmin($id)
+    {
+        $base = new Connect;
+        $query = "UPDATE `users` SET is_admin=0 WHERE id ='$id';";
+        
+        $data = $base->prepare($query);
+        $data->execute();
+        
+        return true;
+    }
     public function addToBase()
     {
         $base = new Connect;
@@ -62,23 +81,26 @@ class User
                 VALUES ('$this->id', '$this->first_name', '$this->last_name', '$this->username', '$this->photo_url', '$this->auth_date');";
         
         $data = $base->prepare($query);
-        $data->execute();
+        $res = $data->execute();
+        //var_dump($res);
         return true;
     }
-    
    public function getUserBox()
     {   $output = "<div class=\"user-box\">";
-        $output .= "<h2>Данные Телеграм</h2><hr/>
-            <h2 class=\"user-name\">$this->first_name  $this->last_name </h2>
-            <a href=\"$this->photo_url\"><img src=\"$this->photo_url\" alt=\"$this->first_name $this->last_name\"
-            style=\"width:80px;height:80px;border: 2px solid white;box-shadow: 1px 3px 12px 0px;\"></a><br/><br/>
-            <text>UserName: $this->username</text><br/>
-            <text>UserID  : $this->id </text><br/>";
-           $this->checkAdmin();
+        $output .= //<h2>Данные Телеграм</h2><hr/>
+            "<h2 class=\"user-name\">$this->first_name  $this->last_name </h2>";
+            $this->checkAdmin();
         if ($this->isAdmin == '1')
         {
             $output .= "<strong>Админ</strong><br/><br/>";
         }
+            $output .= "
+            <a href=\"$this->photo_url\"><img src=\"$this->photo_url\" alt=\"$this->first_name $this->last_name\"
+            style=\"width:80px;height:80px;border: 2px solid white;box-shadow: 1px 3px 12px 0px;\"></a><br/><br/>
+            <text>UserName: $this->username</text><br/>
+            <text>UserID  : $this->id </text><br/><br/>";
+          
+        
         if (count($this->player_id_arr)>0)
         {
             foreach($this->player_id_arr as $i=>$player_id)
@@ -88,10 +110,10 @@ class User
                 
             }
         }
+        
         if(strlen($this->username)>1)
         {
             $output .= "<button class=\"btn-get\" onclick=\"window.location.href='https://t.me/$this->username';\">Написать в личку</button>";
-            //$output .= "<a class='btn-get' href='https://t.me/$this->username'>Написать в личку</a>";
         }
     $output .="</div>";
     return $output;

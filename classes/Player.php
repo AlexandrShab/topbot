@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/BaseAPI.php';
+//require_once __DIR__ . '/mysql.php';
 
 class Player
 {
@@ -15,26 +15,22 @@ class Player
     public $date_out;
     public $friend_link;
     public $teamName;
-    public $kc_results;
+
+    public function __get($name)
+    {
+        return $this->$name;
+    }
+    public function __set($name, $value)
+    {
+        $this->$name = $value;
+    }
     
-    public function __construct($arr)
+    public function init($arr)
     {
         foreach ($arr as $key=>$value)
         {
             $this->$key = $value;
         }
-    }
-
-    public function init($arr)
-    {
-        $base = new Connect;
-        $query = "SELECT * FROM players WHERE id ='$this->id' LIMIT 1";
-        
-        $data = $base->prepare($query);
-        $data->execute();
-        $obj = $data->fetch(PDO::FETCH_OBJ);
-        
-        return $obj;
     }
     
     public function setProperties($arr)
@@ -130,6 +126,7 @@ class Player
 
         return true;
     }
+    
     public function getInfo()
     {
         
@@ -163,7 +160,7 @@ class Player
         return 'OK';
     }
     public function getPlayerAsHtml()
-    {   $colors = ["#DCDCDC", "#C3FBD8", "#C6D8FF", "#FED6BC", "#ffccff", "#CCCC66", "#98FB98", "#f5ff8c"];
+    {   $colors = ["#DCDCDC", "#C3FBD8", "#C6D8FF", "#FED6BC", "#ffccff", "#CCCC66", "#98FB98", "#f5ff8c", "#e999ff"];;
     $team_id = $this->team;
         $color = $colors[$team_id];
         $base = new BaseAPI;
@@ -231,10 +228,84 @@ class Player
                 <button type=\"submit\" class=\"btn-get\">Восстановить</button>
             </form><hr/>";
     }  
-    
-        
+        $output .= "<h2>💡Текущая статистика</h2><br/>";
+        if($this->present == 'Yes' || $this->present == '1')
+        {   //блок статистики игрока
+            $bot_url = $base->getBotUrl();
+           $url = $bot_url->value . '?getStat=true&id=' . $this->id;
+            //var_dump($url);
+            $stata = file_get_contents($url);
+            $player_data = json_decode($stata);
+            //var_dump($player_data);
+            $output .="
+                <div class=\"results-box\">
+                    <table style=\"width:90%;border-collapse: collapse;margin:0 auto;\"> 
+                 <tbody>
+                  <style type=\"text/css\">
+                    td { 
+                        text-align: center;
+                        padding: 6px;
+                        border: solid gray 1px;
+                      }
+                  </style>
+                    <tr>   
+                        <td>
+                            <strong>📈 Средний рез. за 5КС</strong>
+                        </td>
+                        <td>
+                            <strong>$player_data->avg_res</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>🏆 Позиция среди игроков</strong> 
+                        </td>
+                        <td>
+                            <strong>$player_data->place</strong> 
+                        </td>                                        
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>🏅 Позиция в команде</strong> 
+                        </td>
+                        <td>
+                            <strong>$player_data->team_place</strong> 
+                        </td>                                        
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>🚕 Гараж🛠</strong> 
+                        </td>
+                        <td>
+                            <strong>$player_data->garage</strong> 
+                        </td>
+                    </tr>
+                    <tr>     
+                        <td>
+                            <strong>📊 Средние КМ за 4 недели</strong> 
+                        </td>
+                        <td>
+                            <strong>$player_data->km</strong> 
+                        </td> 
+                    </tr>    
+                      
+                    <tr>
+                        <td>
+                            <strong>⛔️Пропущено заездов</strong> 
+                        </td>
+                        <td>
+                            <strong>$player_data->propuski</strong> 
+                        </td>                                        
+                    </tr>              
+                 </tbody>
+                </table><br/>
+            </div>";
+            
+        }
+       /* $output .="<button class=\"btn-get\" onclick='document.location.href=\"getPlayerResults?id=$this->id\"'>Все данные</button></br><p1>
+        Получение всех данных из базы в таблицах  может занять некоторое время...</p1><hr/>"; */    
         $output.= '</div>';
-        
+       
         $output.=  "<script src=\"/script/getPlayerInfo.js\"></script>";
         return $output;
     }
@@ -247,56 +318,63 @@ class Player
         $data->execute();
         return $query;
     }
-    function getKcResults($kol_kc) //если $kol_kc==0, выдаст все результаты
-    {       //Выдает массив [[название кс, [res1, res2, res3, res4]]]
+   /**
+     * Получение всех результатов игрока из базы
+     */
+    public function getAllResults()
+    {
+        $id = $this->id;
+        //Получаем гараж
         $db = new Connect;
-        $query = "SELECT * FROM kc_list ORDER BY id DESC";// В порядку обратном добавлению кс
+        $query = "SELECT date, gar FROM garage WHERE player_id ='$id' ORDER BY date;";
         $data = $db->prepare($query);
         $data->execute();
-        while ($out_data = $data->fetch(PDO::FETCH_ASSOC)){
-            $kc_table_data[] = $out_data;
-        }    
-            if(!$kc_table_data) return false;
-            if(!$kol_kc or (count($kc_table_data) < $kol_kc)) $kol_kc = count($kc_table_data);
-        for ($i = 0; $i < $kol_kc; $i++)
-        {   
-            $kc_name = $kc_table_data[$i]['name'];
-            $table = $kc_table_data[$i]['table_name'];
-            $query = "SELECT * FROM $table WHERE player_id = $this->id;";
+        $gars = [];
+        while($OutputData = $data->fetch(PDO::FETCH_ASSOC))
+        {
+            $gars[] = $OutputData;
+        }
+        $this->garages = $gars;
+        //Получаем КМ
+        $query = "SELECT date, km FROM chest WHERE player_id ='$id' ORDER BY date;";
+        $data = $db->prepare($query);
+        $data->execute();
+        $km = [];
+        while($OutputData = $data->fetch(PDO::FETCH_ASSOC))
+        {
+            $km[] = $OutputData;
+        }
+        $this->km = $km;
+
+        //Получаем все Резы КС
+        // 1.соберем данные о названиях и таблицах
+        $query = "SELECT * FROM kc_list ORDER BY id;";
+        $data = $db->prepare($query);
+        $data->execute();
+        $kc_data = [];
+        while($OutputData = $data->fetch(PDO::FETCH_ASSOC))
+        {
+            $kc_data[] = $OutputData;
+        }
+        $kc_results = [];
+        foreach ($kc_data as $kc)
+        {
+            $table = $kc['table_name'];
+            $kc_name = $kc['name'];
+
+            $query = "SELECT res_1, res_2, res_3, res_4 FROM $table WHERE player_id = '$id';";
             $data = $db->prepare($query);
             $data->execute();
-            $kc_data = $data->fetch(PDO::FETCH_ASSOC);
-            if ($kc_data)
-            {   
-                $kc_data = array($kc_data['res_1'],$kc_data['res_2'],$kc_data['res_3'],$kc_data['res_4']);
-                $resy = [];
-                foreach($kc_data as $val)
-                {
-                    if(($val != null) || ($val > 0))
-                    {
-                        $resy[] = $val;
-                    }
-                }
-                $arr['kc_name'] = $kc_name;
-                $arr['results'] = $resy;
-                $all_kc_data[] = $arr;
+            $OutputData = $data->fetch(PDO::FETCH_ASSOC);
+            if($OutputData) 
+            {
+                $kc_results[$kc_name] = $OutputData;
             }
+            
         }
-            if(!$all_kc_data) return false;
-            $this->kc_results = $all_kc_data;
-            return $all_kc_data;
+        $this->results_kc = $kc_results;
+        
+        return $this;
     }
-    function getAvgResults($kol_kc)
-    {
-        if(!$this->kc_results)
-        {
-            $this->kc_results = $this->getKcResults($kol_kc);
-        }
-        if(!$this->kc_results) return false;
-        if(($kol_kc>count($this->kc_results)) or ($kol_kc == 0)) $kol_kc = count($this->kc_results);
-        for ($i=0;$i<$kol_kc;$i++)
-        {
-            $kc = $this->kc_results[$i]['results'];
-        }
-    }
+    
 }

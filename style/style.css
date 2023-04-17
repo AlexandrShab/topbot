@@ -1,0 +1,183 @@
+body{
+  background-color: mintcream;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+  .navbar {
+    overflow: hidden;
+    background-color: dimgray;
+  }
+  
+  .navbar .lnk, .item {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  .dropdown {
+    float: left;
+    overflow: hidden;
+  }
+  
+  .dropdown .dropbtn {
+    font-size: 16px;  
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+  }
+  
+  .navbar .lnk:hover, .item:hover, .dropdown:hover .dropbtn {
+    background-color: gray;
+  }
+  
+  .dropdown-content {
+    
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content .item {
+    min-width: 200px;
+    background-color:#f9f9f9;
+    border:none;
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .dropdown-content .lnk:hover, .item:hover {
+    background-color: #ddd;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  td, th{
+          border: 1px solid black;
+          
+      }
+      tr:hover{
+        color: darkblue;
+        transition: color 0.3 0.3;
+      }
+      .btn-get, .btn-find{
+        display: inline-block; /* Строчно-блочный элемент */
+        text-decoration: none;
+        text-align: center;
+        padding: 10px;
+        border:none;
+        background-color: #f9f9f9;
+        height: 50px;
+        width:100px;
+        margin-top: 0px;
+        margin-left: 20px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        box-shadow: 5px 0px 5px 1px lightgray;
+       }
+      .btn-get:hover, .btn-find:hover{
+        background-color: lightgray;
+        box-shadow: 5px 0px 5px 5px  gainsboro; 
+        border: 1px solid white;
+      }
+      .btn-get:active, .btn-find:active{
+        background-color: gray;
+        box-shadow: none;
+      }
+      .btn-min {
+        display: inline-block; /* Строчно-блочный элемент */
+        
+        text-align: center;
+        padding: 10px;
+        border:none;
+        background-color: #f9f9f9;
+        height: 30px;
+        margin-top: 10px;
+        margin-left: 20px;
+        width: 50px;
+        border: 1px solid #f9f9f9;
+        border-radius: 5px;
+        box-shadow: 5px 0px 5px 1px lightgray;     
+      }
+      .btn-min:hover{
+        background-color: lightgray;
+        box-shadow: 5px 0px 5px 1px  gainsboro; 
+        border: 1px solid white;
+      }
+      .btn-min:active{
+        background-color: gray;
+        box-shadow: none;
+      }
+      .findbar{
+        font-size:16px;
+        height:70px;
+        padding:20px;
+        color:black;
+      }
+      #find{
+        height: 40px;
+        margin: 0px;
+        width: 40%;
+      }
+      #find:hover{
+        cursor:zoom-in;
+      }
+     .ava{
+        position: absolute;
+        margin: top 50px;
+        padding: 10px;
+        height: 60px;
+        width: 60px;
+     }
+     .input-item{
+      margin: 20px;
+      width: 90%;
+      border: none;
+      height: 30px;
+      background-color: #f9f9f9;
+      margin-top: 0px;
+     }
+    .content {
+      margin: 40px;
+      margin-top: 140px;
+    }
+    .player-info td{
+      padding: 5px;
+      border: none;
+    }
+    .auth{
+       
+        float: right;
+        padding: 7px;
+        font-size: 16px;
+        color: white;
+        text-decoration: none;
+        vertical-align:middle;
+    }
+    .user-box{
+        margin:40px;
+        padding-left:20px;
+        border: 2px solid gray;
+        background-color: beige;
+    }
+    .edit-form{
+        margin:40px;
+    }
+.team-description {
+  width: 80%;
+  margin: 0 auto;
+}
+    

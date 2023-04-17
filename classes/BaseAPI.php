@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . '/Connect.php';
+
+
 class BaseAPI
 {
     function getAllPlayers()
@@ -123,7 +125,17 @@ class BaseAPI
         $data->execute();
         return true;
     }
-    
+
+    function deleteRow($id)
+    {
+        $db = new Connect;
+        $query = "DELETE FROM products WHERE id = $id;";
+        //print_r($query);
+        $data = $db->prepare($query);
+        $data->execute();
+        return true;
+    }
+
     function updatePlayerParam($id, $param, $value)
     {
         $db = new Connect;
@@ -134,18 +146,27 @@ class BaseAPI
     }
     function addKc($name)
     {
+         $db = new Connect;
+        $query = "SELECT name FROM kc_list;";
+        $data = $db->prepare($query);
+        $data->execute();
+        while ($output = $data->fetch(PDO::FETCH_ASSOC)) 
+        {
+            if ($output['name'] == $name) return "exist";
+        }
+        
         $db = new Connect;
         $query = "SELECT max(id) FROM kc_list;";
         $data = $db->prepare($query);
         $data->execute();
         $id = $data->fetch(PDO::FETCH_ASSOC);
-
-        $table = 'kc_0' . $id['max(id)'];
+        $id = intval($id['max(id)'])+1;
+        $table = 'kc_0' . $id;
         $query = "INSERT INTO kc_list (name, table_name) VALUES ('$name', '$table');";
         //print_r($query);
         $data = $db->prepare($query);
         $data->execute();
-        //echo $table;
+        echo $table;
         $query = "CREATE TABLE `$table` (
             	`id` INT(10) NOT NULL AUTO_INCREMENT,
                 `player_id` INT(10) NOT NULL REFERENCES `players` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION,
@@ -164,6 +185,31 @@ class BaseAPI
         $data->execute();
         return true;
     }
+    public function renameKS($name)
+    {
+       
+       $db = new Connect;
+        $query = "SELECT max(id) FROM kc_list;";
+        $data = $db->prepare($query);
+        $data->execute();
+        $id = $data->fetch(PDO::FETCH_ASSOC);
+        $id = intval($id['max(id)']);
+        $tableWithResults = 'kc_0' . $id;
+        
+        $query = "UPDATE `kc_list` SET name ='$name' WHERE id='$id';";
+        $data = $db->prepare($query);
+        $data->execute();
+        
+        $query = "SELECT `name` FROM `kc_list`;";
+        $data = $db->prepare($query);
+        $data->execute();
+        $names;
+        while ($output = $data->fetch(PDO::FETCH_ASSOC)) {
+            $names[] = $output;
+        }
+        $res = $names;
+        return  $res;
+    }
     public function saveVars($wurl,$names)
     {
         $db = new Connect;
@@ -179,7 +225,7 @@ class BaseAPI
         
         return true;
     }
-
+    
     function getBotUrl()
     {
         $db = new Connect;
@@ -194,9 +240,9 @@ class BaseAPI
     function getLastPlayerId()
     {
         $db = new Connect;
-       
-        $query = "SELECT MAX(id) FROM `players`";
         
+        $query = "SELECT MAX(id) FROM `players`";
+       
         $data = $db->prepare($query);
         $data->execute();
         $lastId = $data->fetch(PDO::FETCH_ASSOC);
@@ -237,7 +283,27 @@ class BaseAPI
         }
         return $arrUsers;
     }
-
+    
+     public function setAsAdmin($id)
+    {
+        $base = new Connect;
+        $query = "UPDATE `users` SET is_admin=1 WHERE id ='$id';";
+        
+        $data = $base->prepare($query);
+        $data->execute();
+        
+        return true;
+    }
+    public function unsetAsAdmin($id)
+    {
+        $base = new Connect;
+        $query = "UPDATE `users` SET is_admin=0 WHERE id ='$id';";
+        
+        $data = $base->prepare($query);
+        $data->execute();
+        
+        return true;
+    }
     function getKsTableName($ks_name)
     {
       $base = new Connect;
@@ -246,7 +312,7 @@ class BaseAPI
             $data = $base->prepare($query);
             $data->execute();
             $table_name = $data->fetch(PDO::FETCH_OBJ);
-            print_r($table_name->table_name);
+print_r($table_name->table_name);
             return $table_name->table_name;  
     }
     
@@ -264,6 +330,42 @@ class BaseAPI
             
             $data = $base->prepare($query);
             $data->execute();   
+        }
+        return true;
+    }
+    function saveGarages($garsArr)
+    {
+        $base = new Connect;
+        
+        foreach($garsArr as $gar)
+        {
+            $player_id = $gar['player_id'];
+            $date = $gar['date'];
+            $arrDate = explode('.', $date);
+                $date = $arrDate[2] . '-' . $arrDate[1] .'-' . $arrDate[0];
+            $garage = $gar['garage'];
+            $query = "INSERT INTO garage (player_id, date, gar) 
+                VALUES('$player_id','$date','$garage');";
+            $data = $base->prepare($query);
+            $data->execute(); 
+        }
+        return true;
+    }
+    function saveKm($kmsArr)
+    {
+        $base = new Connect;
+        
+        foreach($kmsArr as $chest)
+        {
+            $player_id = $chest['player_id'];
+            $date = $chest['date'];
+            $arrDate = explode('.', $date);
+                $date = $arrDate[2] . '-' . $arrDate[1] .'-' . $arrDate[0];
+            $km = $chest['km'];
+            $query = "INSERT INTO chest (player_id, date, km) 
+                VALUES('$player_id','$date','$km');";
+            $data = $base->prepare($query);
+            $data->execute(); 
         }
         return true;
     }

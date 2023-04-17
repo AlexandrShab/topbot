@@ -90,7 +90,7 @@ const app = Vue.createApp({
             }
             console.log(this.teams)
       },
-      async addPlayer(){
+     async addPlayer(){
         if ((this.error == '') && (this.newPlayerId != 'не доступен') && (this.playerName !='') && (this.selected != 'команда не выбрана')){
           let data = { 
             "id": this.newPlayerId,
