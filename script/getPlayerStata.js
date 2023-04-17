@@ -34,9 +34,9 @@ const vueApp = Vue.createApp({
         },
         setValues(pl_id, playerData){
             this.player_id = pl_id;
-            this.garages = playerData.garage;
-            this.chests = playerData.chest;
-            this.ks_resultes = playerData.ks_results;
+            this.garages = playerData.garages;
+            this.chests = playerData.km;
+            this.ks_resultes = playerData.results_kc;
       
         }
       },

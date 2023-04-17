@@ -137,14 +137,14 @@ if (($_SERVER["REDIRECT_URL"] == '/getPlayerResults') && ($_GET['id']) && $isAdm
     $player->id = $_GET['id'];
     $player = $player->getInfo();
                 //отправка объекта Player боту для сбора и сохранения резов в FireBase
-    $player->get_player_stat = "true";
-        sendDataToBot($player);
+   // $player->get_player_stat = "true";
+    //    sendDataToBot($player);
         
     $teamNames = $base->getTeamNames();
     
     $team = $player->team - 1;
     $player->teamName = $teamNames[$team];
-    require_once __DIR__ . '/pages/player_stata.php';
+    require_once __DIR__ . '/pages/player_results.php';
     $output;
     $output .= "Игрок ". $player->name . " ID: " . $player->id; 
     echo $output;
