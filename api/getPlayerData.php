@@ -22,7 +22,7 @@ header('Access-Control-Allow-Origin: *');
         $obj = json_encode($player);
         
         header('Content-Type: application/json');
-        print_r( $obj);
+        print_r($obj);
         
     }
     
