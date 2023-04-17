@@ -8,7 +8,7 @@ const vueApp = Vue.createApp({
         chests:[],
         ks_resultes:{}
               }
-    },
+    }, 
     methods: {
         async getData(pl_id){
             
