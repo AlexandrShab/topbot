@@ -76,5 +76,5 @@ echo "<div class='content'
     */
 echo $output;
 echo '</div>';
-echo '<script src="/script/getPlayerInfo.js"></script>';*/
+echo '<script src="/script/getPlayerInfo.js"></script>';
 ?>
