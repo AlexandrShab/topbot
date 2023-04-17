@@ -3,7 +3,7 @@
     </div>
 <div id="container">
     
-        <button class="btn-get" v-on:click="getData('<?php echo $player->id;?>')" v-if="player_id==''">Просмотр</button>
+        <button class="btn-get" @click="getData('<?php echo $player->id;?>')" v-if="player_id==''">Просмотр</button>
 
     <div class="stata" v-if="player_id">
     <br/><h2>Данные по KC</h2>
