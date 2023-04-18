@@ -46,6 +46,9 @@
         </style>    
 </head>
 <body>
+    <div id="loader" class="loading" >
+        <div class="spinner"></div>
+    </div>
     <script>
         
         if (document.readyState == 'loading') {
@@ -70,9 +73,7 @@
         loader.style.visibility = 'hidden';
       }
   </script>
-    <div id="loader" class="loading" >
-        <div class="spinner"></div>
-    </div>
+   
     <div class="auth-bar">
         <ava class="dropdown">
                 <a href="https://t.me/ByTopBot">
