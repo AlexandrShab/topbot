@@ -1,10 +1,11 @@
-
+    <script src="https://unpkg.com/vue@3.2.36"></script>
+    <script type="module" src="/script/getPlayerStata.js"></script>
 <!--<div class="name-page">
         <h1>Данные Статистики</h1>
     </div>
 -->
 <div id="container">
-        <span @onload ="getData('<?php echo $player->id;?>')" v-if="player_id==''"></span>
+        <span @onload="getData('<?php echo $player->id;?>')" v-if="player_id==''"></span>
         <button class="btn-get" @click="getData('<?php echo $player->id;?>')" v-if="player_id==''">Просмотр</button>
 
     <div class="stata" v-if="player_id">
@@ -113,6 +114,5 @@
     
     
 
-    <script src="https://unpkg.com/vue@3.2.36"></script>
-    <script type="module" src="/script/getPlayerStata.js"></script>
+    
   
