@@ -90,5 +90,5 @@
     
 
     <script src="https://unpkg.com/vue@3.2.36"></script>
-    <script src="/script/players.js"></script>
+    <script src="/script/players1.js"></script>
   <!--  <script src="/public/players1.js"></script>-->

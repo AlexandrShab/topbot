@@ -37,4 +37,4 @@
         </div>
     </div>
     <script src="https://unpkg.com/vue@3.2.36"></script> 
-    <script src="/public/addPlayer.js"></script>
+    <script src="/public/addPlayer1.js"></script>

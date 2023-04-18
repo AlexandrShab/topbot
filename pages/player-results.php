@@ -1,5 +1,5 @@
     <script src="https://unpkg.com/vue@3.2.36"></script>
-    <script type="module" src="/script/getPlayerStata.js"></script>
+    <script type="module" src="/script/getPlayerStata1.js"></script>
 <!--<div class="name-page">
         <h1>Данные Статистики</h1>
     </div>
