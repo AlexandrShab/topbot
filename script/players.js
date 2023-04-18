@@ -1,3 +1,4 @@
+window.addEventListener("unload", hideloading());
 const app = Vue.createApp({
     data() {
       return {
@@ -66,7 +67,8 @@ const app = Vue.createApp({
       async getPlayerLink(id){
         loading()
         window.location.href = '/getPlayer?id='+id;
-        hideloading()
+
+        
       },
       getTeam(team_id){
         this.playersOfTeam = []
