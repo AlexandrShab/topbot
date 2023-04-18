@@ -47,6 +47,7 @@
 </head>
 <body>
     <script>
+        window.addEventListener("unload", hideloading);
       function loading() {
 
         let loader = document.getElementById('loader');

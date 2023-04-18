@@ -87,9 +87,11 @@ const app = Vue.createApp({
   
     },
   beforeMount() {
+    loading()
     this.getAllPlayers()
     this.getTeamNames()
     this.getNewPlayerId()
+    hideloading()
   }
 })
 /*app.component(this.playersArr[], {

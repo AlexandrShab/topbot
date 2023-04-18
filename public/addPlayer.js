@@ -91,6 +91,7 @@ const app = Vue.createApp({
             console.log(this.teams)
       },
      async addPlayer(){
+
         if ((this.error == '') && (this.newPlayerId != 'не доступен') && (this.playerName !='') && (this.selected != 'команда не выбрана')){
           let data = { 
             "id": this.newPlayerId,
@@ -107,6 +108,7 @@ const app = Vue.createApp({
             "body": JSON.stringify(data)
           }
           this.error = 'Игрок '+this.playerName+' добавляется... Подождите завершения.';
+          loading()
         let resp = await fetch('http://topbots.site/api/addplayer.php', options)
           
           let res = await resp.json()
@@ -115,14 +117,17 @@ const app = Vue.createApp({
           this.playerName = ''
           this.selected = 'команда не выбрана'
           this.error = ''
+          hideloading()
         }
       }
     
       },
     beforeMount() {
+      loading()
       this.getAllPlayers()
       this.getTeamNames()
       this.getNewPlayerId()
+      hideloading()
     }
   })
   /*app.component(this.playersArr[], {
