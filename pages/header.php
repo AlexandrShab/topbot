@@ -9,7 +9,7 @@
     <title>Belarus🔝Team</title>
     <!--?php echo "<title>$title</title>" ?> -->
     <style>
-        .spinner {
+/*        .spinner {
           width: 40px;
           height: 98px;
           display: inline-block;
@@ -47,7 +47,7 @@
           100% { box-shadow: 0 -20px inset }
         }
 
-
+ */
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
         .loading {
@@ -64,7 +64,7 @@
             z-index: 20;
             transition: 0.2s;
         }
-/*
+
         .spinner {
 
             height: 100px;
@@ -86,7 +86,7 @@
                 transform: rotate(360deg);
             }
         }
-        */
+       
     </style>
 </head>
 
