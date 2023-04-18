@@ -11,7 +11,9 @@
           .loading {
             visibility: hidden;
             display: flex;
-            position: sticky;
+            position: fixed;
+            top: 0px;
+            left: 0px;
             background-color: rgba(255,255,255,0.7);
             align-items: center;
             justify-content: center;
