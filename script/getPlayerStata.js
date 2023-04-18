@@ -6,7 +6,7 @@ const vueApp = Vue.createApp({
         player_id : '',
         garages:[],
         chests:[],
-        ks_resultes:{}
+        ks_resultes:''
               }
     }, 
     methods: {
