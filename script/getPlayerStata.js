@@ -13,6 +13,7 @@ const vueApp = Vue.createApp({
         async getData(pl_id){
             
             if(pl_id !=''){
+                    loading()
                     let data = {"id":pl_id}
                     const url = "http://topbots.site/api/getPlayerData.php"
                     let options = {
@@ -40,6 +41,7 @@ const vueApp = Vue.createApp({
             this.chests = playerData.km;
             this.ks_resultes = playerData.results_kc ;
             console.log(this.player_id, this.garages)
+            hideloading()
       
         }
       },

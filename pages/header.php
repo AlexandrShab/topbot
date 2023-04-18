@@ -7,9 +7,58 @@
         <link href="public/style.css" rel="stylesheet">
         <title>Belarus🔝Team</title>
         <!--?php echo "<title>$title</title>" ?> -->
-        
+        <style>
+          .loading {
+            visibility: hidden;
+            display: flex;
+            position: absolute;
+            background-color: rgba(255,255,255,0.7);
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            z-index: 20;
+            transition: 0.2s;
+            }
+            .spinner {
+
+                height: 100px;
+                width: 100px;
+                border-left: 10px solid lightgreen;
+                border-bottom: 10px solid lightgreen;
+                border-right: 10px solid lightgreen;
+                border-top: 10px solid transparent;
+                border-radius: 50%;
+                animation: spinner 2s ease infinite;
+           }
+
+                @keyframes spinner {
+                            from {
+                                transform: rotate(0deg);
+                            }
+
+                            to {
+                                transform: rotate(360deg);
+                            }
+                        }
+        </style>    
 </head>
 <body>
+    <script>
+      function loading() {
+
+        let loader = document.getElementById('loader');
+        loader.style.visibility = 'visible';
+
+        }
+        function hideloading() {
+        let loader = document.getElementById('loader');
+        loader.style.visibility = 'hidden';
+      }
+  </script>
+    <div id="loader" class="loading" >
+        <div class="spinner"></div>
+    </div>
     <div class="auth-bar">
         <ava class="dropdown">
                 <a href="https://t.me/ByTopBot">

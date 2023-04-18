@@ -9,10 +9,60 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 -->
     <?php echo "<title>$title</title>" ?> 
+<style>
+          .loading {
+            visibility: hidden;
+            display: flex;
+            position: absolute;
+            background-color: rgba(255,255,255,0.7);
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            z-index: 20;
+            transition: 0.2s;
+        }
+        .spinner {
 
+            height: 100px;
+            width: 100px;
+            border-left: 10px solid lightgreen;
+            border-bottom: 10px solid lightgreen;
+            border-right: 10px solid lightgreen;
+            border-top: 10px solid transparent;
+            border-radius: 50%;
+            animation: spinner 2s ease infinite;
+        }
+
+@keyframes spinner {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+</style>
 </head>
 
 <body>
+  <script>
+    function loading() {
+
+      let loader = document.getElementById('loader');
+      loader.style.visibility = 'visible';
+
+      }
+      function hideloading() {
+      let loader = document.getElementById('loader');
+      loader.style.visibility = 'hidden';
+      }
+  </script>
+<div id="loader" class="loading" >
+        <div class="spinner"></div>
+    </div>
+
 <div id="container">
   
   <nav class="navbar">
@@ -34,52 +84,7 @@
       <a class="lnk" href="/">Players</a>
       <a class="lnk" href="https://t.me/ByTopBot">Леди Бот в Telegram</a>
       <div class="authenticate" style="padding-top:10px; float: right">
-<?php/*
-define('BOT_USERNAME', 'ByTopBot'); // place username of your bot here
-function getTelegramUserData() {
-  if (isset($_COOKIE['tg_user'])) {
-    $auth_data_json = urldecode($_COOKIE['tg_user']);
-    $auth_data = json_decode($auth_data_json, true);
-    return $auth_data;
-  }
-  return false;
-}
 
-if ($_GET['logout']) {
-  setcookie('tg_user', '');
-  header('Location: index.php');
-}
-$tg_user = getTelegramUserData();
-$html = '<span> </span> ';
-if ($tg_user !== false) {
-  $first_name = htmlspecialchars($tg_user['first_name']);
- // $html = '';
- if (isset($tg_user['photo_url'])) {
-    $photo_url = htmlspecialchars($tg_user['photo_url']);
-    $html .= "<a href=\"?logout=1\"><img src=\"{$photo_url}\" style=\"width:30px; border-radius:15px\">Log out</a>";
-  }
-  
-   // $html .= " {$first_name}!";
-  
-  
- // $html .= "  <a href=\"?logout=1\">Log out</a>";
-} else {
-  $bot_username = BOT_USERNAME;
-  $html = <<<HTML
-  <span> </span>
-<script async src="https://telegram.org/js/telegram-widget.js?2" data-telegram-login="{$bot_username}" data-size="medium" data-auth-url="check_authorization.php"></script>
-HTML;
-}
-
-    echo $html;  */
-?>
-       <!-- <script async src="https://telegram.org/js/telegram-widget.js?19" data-telegram-login="bytopbot" data-size="medium" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
-        <script type="text/javascript">
-          function onTelegramAuth(user) {
-            alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
-          }
-        </script>
-        -->
       </div>
       
         <br/>
