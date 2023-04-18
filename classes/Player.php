@@ -303,7 +303,7 @@ class Player
             
         }
         $output .="<button class=\"btn-get\" onclick='document.location.href=\"getPlayerResults?id=$this->id\"'>Все данные</button></br><p1>
-        Получение всех данных из базы в таблицах  может занять некоторое время...</p1><hr/>";    
+        Получение всех данных из базы ТЕПЕРЬ МОМЕНТАЛЬНО!!!!</p1><hr/>";    
         $output.= '</div>';
        
         $output.=  "<script src=\"/script/getPlayerInfo.js\"></script>";
