@@ -1,8 +1,10 @@
-<div class="name-page">
+
+<!--<div class="name-page">
         <h1>Данные Статистики</h1>
     </div>
+-->
 <div id="container">
-    
+        <span @onload ="getData('<?php echo $player->id;?>')"></span>
         <button class="btn-get" @click="getData('<?php echo $player->id;?>')" v-if="player_id==''">Просмотр</button>
 
     <div class="stata" v-if="player_id">
