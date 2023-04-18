@@ -2,7 +2,7 @@
 <h1 class="name-page">Игрок <?php echo $player->name; ?></h1>
 <h3 class="name-page">Редактор данных</h3>
 <hr/>
-<form class="edit-form" method="post" action="/server" onsubmit="loading(); window.location.href = '/getPlayer?id='+<?php echo $player->id; ?>;">
+<form class="edit-form" id="f" method="post" action="/server" onsubmit="loading(); document.getElementById('f').submit();">
     
     
         
