@@ -4,7 +4,7 @@
     </div>
 -->
 <div id="container">
-        <span @onload ="getData('<?php echo $player->id;?>')"></span>
+        <span @onload ="getData('<?php echo $player->id;?>')" v-if="player_id==''"></span>
         <button class="btn-get" @click="getData('<?php echo $player->id;?>')" v-if="player_id==''">Просмотр</button>
 
     <div class="stata" v-if="player_id">
