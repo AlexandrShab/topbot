@@ -44,12 +44,12 @@
           height: inherit;
           border-radius: 50%;
           transform: rotateX(70deg);
-          animation: 1s spin linear infinite;
+          animation: 2s spin linear infinite;
         }
         .spinner:after {
           color: #FF3D00;
           transform: rotateY(70deg);
-          animation-delay: .4s;
+          animation-delay: .8s;
         }
 
       @keyframes rotate {
