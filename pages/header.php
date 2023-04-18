@@ -63,9 +63,15 @@
             window.addEventListener("unload", hideloading)
             hideloading()
         }
-        const loader = document.getElementById('loader')
-        function loading(){loader.style.visibility = 'visible'}
-        function hideloading(){loader.style.visibility = 'hidden'}
+        
+        function loading(){
+            let loader = document.getElementById('loader')
+            loader.style.visibility = 'visible'
+        }
+        function hideloading(){
+            let loader = document.getElementById('loader')
+            loader.style.visibility = 'hidden'
+        }
     </script>
 
     <div class="auth-bar">
