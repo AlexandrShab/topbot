@@ -9,7 +9,7 @@
     <title>Belarus🔝Team</title>
     <!--?php echo "<title>$title</title>" ?> -->
     <style>
-/*        .spinner {
+        .spinner {
           width: 40px;
           height: 98px;
           display: inline-block;
@@ -19,7 +19,7 @@
           color: rgba(255, 61, 0, 0.9);
           border-radius: 20px 20px 4px 4px;
           background: #fff;
-          animation: fill 2s linear infinite alternate;
+          animation: fill 2s ease infinite alternate;
         }
         .spinner::after {
           content: '';
@@ -33,7 +33,7 @@
           background: #fff;
           width: 15px;
           height: 35px;
-          animation: fillNeck 2s linear infinite alternate;
+          animation: fillNeck 2s ease infinite alternate;
         }
 
         @keyframes fill {
@@ -47,7 +47,7 @@
           100% { box-shadow: 0 -20px inset }
         }
 
- */
+ 
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
         .loading {
@@ -56,7 +56,7 @@
             position: fixed;
             top: 0px;
             left: 0px;
-            background-color: rgba(255, 255, 255, 0.7);
+            background-color: rgba(20, 20, 20, 0.7);
             align-items: center;
             justify-content: center;
             width: 100%;
@@ -65,7 +65,7 @@
             transition: 0.2s;
         }
 
-        .spinner {
+/*        .spinner {
 
             height: 100px;
             width: 100px;
@@ -86,12 +86,12 @@
                 transform: rotate(360deg);
             }
         }
-       
+       */
     </style>
 </head>
 
 <body>
-    <div id="loader" class="loading">
+    <div id="loader" class="loading" onclick="hideloading()">
         <div class="spinner"></div>
     </div>
     <script>
