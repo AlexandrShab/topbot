@@ -26,7 +26,7 @@ const vueApp = Vue.createApp({
                  
                     const playerData = await res.json()
                     console.log(playerData);
-                    return
+                    
                     //document.getElementById('stata').innerHTML = JSON.stringify(playerData);
                     if(playerData){
                         this.setValues(pl_id, playerData)
