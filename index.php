@@ -146,7 +146,7 @@ if (($_SERVER["REDIRECT_URL"] == '/getPlayerResults') && ($_GET['id']) && $isAdm
     $player->teamName = $teamNames[$team];
     //var_dump($player);
     
-    $output = '<h1>Игрок '. $player->name . ' ID: ' . $player->id.'</h1>'; 
+    $output = "<div class=\"name-page\"><h1>". $player->name . '</h1> <h3>ID: ' . $player->id .'<br/>' . $player->teamName .'</h3></div>'; 
     echo $output;
     require_once __DIR__ . '/pages/player-results.php';
     
