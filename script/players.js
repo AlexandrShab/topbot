@@ -1,4 +1,4 @@
-window.addEventListener("unload", hideloading());
+window.addEventListener("unload", hideloading);
 const app = Vue.createApp({
     data() {
       return {
