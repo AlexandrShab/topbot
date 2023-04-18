@@ -238,7 +238,7 @@ if ($_SERVER["REDIRECT_URL"] == '/server')
       require_once __DIR__ . '/pages/footer.php';
       exit;
     }
-  }else echo "<h2>Данные обновлены в базе и таблице</h2>";
+  }else echo "<h2 style=\"margin-left:10px;\">Данные обновлены в базе и таблице</h2>";
   if ($_POST)
   {
     //var_dump($_POST);

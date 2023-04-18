@@ -47,7 +47,18 @@
 </head>
 <body>
     <script>
-        window.addEventListener("unload", hideloading);
+        
+        if (document.readyState == 'loading') {
+            // ещё загружается
+            loading()
+            //ждём события
+            document.addEventListener('DOMContentLoaded', hideloading)
+            } else {
+            // DOM готов!
+            hideloading()
+            window.addEventListener("unload", hideloading)
+           
+            }
       function loading() {
 
         let loader = document.getElementById('loader');
