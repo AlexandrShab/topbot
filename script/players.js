@@ -17,6 +17,7 @@ const app = Vue.createApp({
     },
     methods: {
         async getAllPlayers(){
+            loading()
             let resp = await fetch('http://topbots.site/api/getplayers.php');
             if (!resp.ok) {
               console.log('Ответ сети был не ok.');
@@ -25,6 +26,7 @@ const app = Vue.createApp({
             this.loaded = true;
             this.allPlayers = this.players; 
             console.log(this.players)
+            hideloading()
             
         },
          async getPresent(){
@@ -62,6 +64,7 @@ const app = Vue.createApp({
         this.fName = ''
       },
       async getPlayerLink(id){
+        loading()
         window.location.href = '/getPlayer?id='+id;
       },
       getTeam(team_id){
