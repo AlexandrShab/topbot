@@ -30,21 +30,21 @@
             <tbody>
             
                 
-                    <tr v-for="key in ks_resultes">   
+                    <tr v-for="(ks, indx) in ks_resultes">   
                         <td>
-                            <strong>{{ key }}</strong>
+                            <strong>{{ indx }}</strong>
                         </td>
                         <td>
-                            <strong>{{ key.res_1 }}</strong>
+                            <strong>{{ ks.res_1 }}</strong>
                         </td>
                         <td>
-                            <strong>{{key.res_2 }}</strong> 
+                            <strong>{{ks.res_2 }}</strong> 
                         </td>
                         <td>
-                            <strong>{{key.res_3 }}</strong> 
+                            <strong>{{ks.res_3 }}</strong> 
                         </td>
                         <td>
-                            <strong>{{key.res_4 }}</strong> 
+                            <strong>{{ks.res_4 }}</strong> 
                         </td>    
                                           
                     </tr>                 
@@ -95,7 +95,7 @@
             <tbody>
             
                 
-                    <tr v-for="item in km" style="border: solid black 1px;">   
+                    <tr v-for="item in chests" style="border: solid black 1px;">   
                         <td>
                             <strong>{{ item.date }}</strong>
                         </td>
